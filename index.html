@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link type="text/css" href="styles.css" media="all" rel="stylesheet" charset="utf-8" />
+
+</head>
+
+<body>
+
+<header class="main-header">
+  <nav class="main-navbar" role="navigation" aria-label="main navigation">
+    <div>
+      <h1>My Site</h1>
+    </div>
+    <ul class="main-nav">
+      <li>
+        <a href="#">Link 1</a>
+      </li>
+      <li class="dropdown" role="button" aria-expanded="false">
+        <a href="#" class="dropdown-trigger">Link 2</a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#">Sublink 1</a>
+          </li>
+          <li>
+            <a href="#">Sublink 2</a>
+          </li>
+          <li>
+            <a href="#">Sublink 3</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Link 3</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+
+<div>
+  Main Section
+</div>
+
+<footer>
+  Footer
+</footer>
+
+
+<script type="module">
+
+function closeDropdowns() {
+  const dropdowns = document.querySelectorAll('.dropdown.is-active');
+  dropdowns.forEach((el) => {
+    el.classList.remove('is-active');
+  });
+}
+
+let dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach((el) => {
+  let trigger = el.querySelector('.dropdown-trigger');
+  trigger.addEventListener('click', function(e) {
+    // Get whether the current dropdown is active *before* we close
+    // them all.
+    const isActive = el.classList.contains('is-active');
+
+    // If a user clicks from one dropdown to another, the first
+    // won't close (due to stopProp below), so we need to do this.
+    closeDropdowns();
+
+    // If the dropdown wasn't active in the first place, make it so.
+    if (!isActive) {
+      el.classList.add('is-active');
+    }
+
+    // This is so when a user clicks on the dropdown, the click
+    // isn't carried to the document level, which would close the
+    // dropdown (even if they're trying to open it).
+    e.stopPropagation();
+  });
+
+  let dropdownMenu = el.querySelector('.dropdown-menu');
+  dropdownMenu.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+
+});
+
+
+/*
+ * Create the necessary global event listeners to close dropdowns.
+ */
+function attachGlobalDropdownListeners() {
+  // If user clicks outside dropdown, close it.
+  document.addEventListener('click', function(e) {
+    closeDropdowns();
+  });
+
+  // Close dropdowns if ESC pressed.
+  document.addEventListener('keydown', function (event) {
+    let e = event || window.event;
+    if (e.key === 'Esc' || e.key === 'Escape') {
+      closeDropdowns();
+    }
+  });
+}
+
+attachGlobalDropdownListeners();
+
+</script>
+
+</body>
+</html>
