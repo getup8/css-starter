@@ -119,8 +119,8 @@ p, h1, h2, h3, h4, h5, h6 {
 .dropdown-trigger::after {
   margin-left: 0.75em;
   vertical-align: 0.125em;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border-left: 2px solid var(--header-font-color);;
+  border-bottom: 2px solid var(--header-font-color);;
   border-radius: 1px;
   content: " ";
   display: inline-block;
@@ -172,7 +172,7 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 5px auto;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background-color: #101010;
+  background-color: var(--header-font-color);
 }
 
 @media only screen and (max-width: 768px) {
@@ -188,6 +188,16 @@ p, h1, h2, h3, h4, h5, h6 {
 
   .main-nav.active {
     display: flex;
+  }
+
+  .main-nav a {
+    color: var(--dropdown-font-color);
+    background-color: var(--dropdown-bg-color);
+  }
+
+  .dropdown-trigger::after {
+    border-left: 2px solid var(--dropdown-font-color);;
+    border-bottom: 2px solid var(--dropdown-font-color);;
   }
 
   .hamburger {
